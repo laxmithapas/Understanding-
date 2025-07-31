@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Counter</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font and overall layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Light background */
+            margin: 0;
+            padding: 16px; /* Add some padding for mobile */
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px; /* Max width for better readability on large screens */
+            width: 100%; /* Full width on small screens */
+        }
+        .counter-display {
+            font-size: 4rem; /* Large font for the counter */
+            font-weight: bold;
+            color: #334155; /* Darker text color */
+            margin-bottom: 24px;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            gap: 12px; /* Space between buttons */
+            justify-content: center;
+        }
+        .button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: none; /* Remove default button border */
+            flex: 1 1 auto; /* Allow buttons to grow and shrink */
+            min-width: 120px; /* Minimum width for buttons */
+        }
+        .button-increment {
+            background-color: #22c55e; /* Green */
+            color: white;
+        }
+        .button-increment:hover {
+            background-color: #16a34a; /* Darker green on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3);
+        }
+        .button-decrement {
+            background-color: #ef4444; /* Red */
+            color: white;
+        }
+        .button-decrement:hover {
+            background-color: #dc2626; /* Darker red on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
+        .button-reset {
+            background-color: #64748b; /* Gray */
+            color: white;
+        }
+        .button-reset:hover {
+            background-color: #475569; /* Darker gray on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(100, 116, 139, 0.3);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            .counter-display {
+                font-size: 3rem; /* Slightly smaller font on mobile */
+            }
+            .button-group {
+                flex-direction: column; /* Stack buttons vertically on very small screens */
+            }
+            .button {
+                width: 100%; /* Full width for stacked buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-4">Simple Counter</h1>
+        <div id="counterDisplay" class="counter-display">0</div>
+        <div class="button-group">
+            <button id="incrementBtn" class="button button-increment">Increment</button>
+            <button id="decrementBtn" class="button button-decrement">Decrement</button>
+            <button id="resetBtn" class="button button-reset">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // This is the JavaScript code that would be compiled from your TypeScript file (e.g., main.ts)
+
+        // 1. Declare a variable to hold the counter value with a type annotation (number).
+        // In TypeScript: let count: number = 0;
+        let count = 0;
+
+        // 2. Get references to the HTML elements.
+        // In TypeScript, you would cast these to their specific types like HTMLSpanElement or HTMLButtonElement.
+        // Example: const counterDisplay = document.getElementById('counterDisplay') as HTMLSpanElement;
+        const counterDisplay = document.getElementById('counterDisplay');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const decrementBtn = document.getElementById('decrementBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // 3. Function to update the display.
+        // In TypeScript: function updateDisplay(): void { ... }
+        function updateDisplay() {
+            if (counterDisplay) {
+                counterDisplay.textContent = count.toString();
+            }
+        }
+
+        // 4. Event handler for incrementing the counter.
+        // In TypeScript: function handleIncrement(): void { ... }
+        function handleIncrement() {
+            count++;
+            updateDisplay();
+        }
+
+        // 5. Event handler for decrementing the counter.
+        // In TypeScript: function handleDecrement(): void { ... }
+        function handleDecrement() {
+            count--;
+            updateDisplay();
+        }
+
+        // 6. Event handler for resetting the counter.
+        // In TypeScript: function handleReset(): void { ... }
+        function handleReset() {
+            count = 0;
+            updateDisplay();
+        }
+
+        // 7. Add event listeners to the buttons.
+        // The '?' is optional chaining, useful if elements might not exist (TypeScript helps catch this).
+        if (incrementBtn) {
+            incrementBtn.addEventListener('click', handleIncrement);
+        }
+        if (decrementBtn) {
+            decrementBtn.addEventListener('click', handleDecrement);
+        }
+        if (resetBtn) {
+            resetBtn.addEventListener('click', handleReset);
+        }
+
+        // Initial display update when the page loads
+        updateDisplay();
+
+        // Example of how you would define a simple interface in TypeScript:
+        /*
+        interface CounterConfig {
+            initialValue: number;
+            step: number;
+        }
+
+        const config: CounterConfig = {
+            initialValue: 0,
+            step: 1
+        };
+        */
+    </script>
+</body>
+</html>
+
